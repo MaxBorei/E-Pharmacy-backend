@@ -1,4 +1,5 @@
 import { getCustomerById, getCustomers } from '../services/customers.js';
+import createHttpError from 'http-errors';
 
 export const customersController = async (req, res, next) => {
   try {
@@ -20,9 +21,9 @@ export const customerControllerById = async (req, res, next) => {
   const { customerId } = req.params;
   const customer = await getCustomerById(customerId);
   if (!customer) {
-    next(new Error('Customer not found'));
-    return;
+    throw createHttpError(404, 'Customer not found');
   }
+
   res.json({
     status: 200,
     message: `Successfully found student with id ${customerId}!`,

@@ -22,9 +22,11 @@ const productSchema = new Schema(
     },
     price: {
       type: String,
+      required: true,
     },
     category: {
       type: String,
+      required: true,
       enum: [
         'Medicine',
         'Heart',

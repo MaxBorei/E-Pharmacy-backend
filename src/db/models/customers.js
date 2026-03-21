@@ -42,4 +42,4 @@ const customersSchema = new Schema(
   },
 );
 
-export const Customer = model('Customer', customersSchema);
+export const Customer = model('Customer', customersSchema, 'customers');

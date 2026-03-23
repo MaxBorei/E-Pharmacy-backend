@@ -1,4 +1,4 @@
-import { getAllSuppliers } from '../services/suppliers.js';
+import { createSuppliers, getAllSuppliers } from '../services/suppliers.js';
 
 export const suppliersController = async (req, res, next) => {
   try {
@@ -13,5 +13,14 @@ export const suppliersController = async (req, res, next) => {
     res.send(JSON.stringify(res, null, 2));
   } catch (err) {
     next(err);
+  }
+};
+
+export const createSuppliersController = async (req, res, next) => {
+  try {
+    const result = await createSuppliers(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
   }
 };

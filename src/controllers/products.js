@@ -3,6 +3,7 @@ import {
   createProduct,
   deleteProduct,
   getAllProducts,
+  updateProduct,
 } from '../services/products.js';
 
 export const productsController = async (req, res, next) => {
@@ -39,4 +40,25 @@ export const deleteProductController = async (req, res, next) => {
   }
 
   res.status(204).send();
+};
+
+export const upsertProductController = async (req, res, next) => {
+  const { productId } = req.params;
+
+  const result = await updateProduct(productId, req.body, {
+    upsert: true,
+  });
+
+  if (!result) {
+    next(createHttpError(404, 'Product not found'));
+    return;
+  }
+
+  const status = result.isNew ? 201 : 200;
+
+  res.status(status).json({
+    status,
+    message: `Successfully upserted a product!`,
+    data: result.product,
+  });
 };

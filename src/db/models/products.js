@@ -16,9 +16,11 @@ const productSchema = new Schema(
     },
     suppliers: {
       type: String,
+      required: true,
     },
     stock: {
       type: String,
+      required: true,
     },
     price: {
       type: String,

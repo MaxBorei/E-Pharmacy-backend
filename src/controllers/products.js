@@ -6,7 +6,7 @@ import {
   updateProduct,
 } from '../services/products.js';
 
-export const productsController = async (req, res, next) => {
+export const getProductsController = async (req, res, next) => {
   try {
     const products = await getAllProducts();
     res.json({

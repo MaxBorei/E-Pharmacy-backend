@@ -18,3 +18,21 @@ export const createSuppliers = async (payload) => {
   });
   return newSupplier;
 };
+
+export const updateSupplier = async (supplierId, payload, options = {}) => {
+  const result = await Supplier.findByIdAndUpdate(
+    { _id: supplierId },
+    payload,
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
+  );
+
+  if (!result || !result.value) return null;
+  return {
+    supplier: result.value,
+    isNew: Boolean(result?.lastErrorObject?.upserted),
+  };
+};

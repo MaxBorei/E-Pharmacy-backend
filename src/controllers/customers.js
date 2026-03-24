@@ -1,7 +1,7 @@
 import { getCustomerById, getCustomers } from '../services/customers.js';
 import createHttpError from 'http-errors';
 
-export const customersController = async (req, res, next) => {
+export const getCustomersController = async (req, res, next) => {
   try {
     const customers = await getCustomers();
     res.json({
@@ -17,7 +17,7 @@ export const customersController = async (req, res, next) => {
   }
 };
 
-export const customerControllerById = async (req, res, next) => {
+export const getCustomerControllerById = async (req, res, next) => {
   const { customerId } = req.params;
   const customer = await getCustomerById(customerId);
   if (!customer) {

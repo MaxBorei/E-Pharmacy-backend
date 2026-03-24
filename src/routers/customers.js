@@ -1,13 +1,18 @@
 import { Router } from 'express';
 import {
-  customerControllerById,
-  customersController,
+  getCustomerControllerById,
+  getCustomersController,
 } from '../controllers/customers.js';
+import { isValidId } from '../middlewares/isValidId.js';
 
 const customersRouter = Router();
 
-customersRouter.get('/customers', customersController);
+customersRouter.get('/customers', getCustomersController);
 
-customersRouter.get('/customers/:customerId', customerControllerById);
+customersRouter.get(
+  '/customers/:customerId',
+  isValidId('customerId'),
+  getCustomerControllerById,
+);
 
 export default customersRouter;

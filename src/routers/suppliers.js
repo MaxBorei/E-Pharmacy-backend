@@ -6,7 +6,7 @@ import {
 } from '../controllers/suppliers.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
-import { supplierSchema } from '../validation/suppliers.js';
+import { supplierSchemaValidation } from '../validation/suppliers.js';
 
 const suppliersRouter = Router();
 
@@ -14,14 +14,14 @@ suppliersRouter.get('/suppliers', suppliersController);
 
 suppliersRouter.post(
   '/suppliers',
-  validateBody(supplierSchema),
+  validateBody(supplierSchemaValidation),
   createSuppliersController,
 );
 
 suppliersRouter.put(
   '/suppliers/:supplierId',
   isValidId('supplierId'),
-  validateBody(supplierSchema),
+  validateBody(supplierSchemaValidation),
   updateSuppliersController,
 );
 

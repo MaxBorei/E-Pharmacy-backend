@@ -4,9 +4,17 @@ import { Product } from '../db/models/products.js';
 export const getAllProducts = async ({
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
+  filter = {},
 }) => {
-  const productQuery = Product.find();
-  const products = await productQuery.sort({ [sortBy]: sortOrder }).exec();
+  const mongoFilter = {};
+
+  if (filter.name) {
+    mongoFilter.name = new RegExp(filter.name, 'i');
+  }
+
+  const products = await Product.find(mongoFilter)
+    .sort({ [sortBy]: sortOrder })
+    .exec();
 
   return {
     data: products,

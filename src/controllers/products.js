@@ -6,19 +6,23 @@ import {
   updateProduct,
 } from '../services/products.js';
 import { parseSortParams } from '../utils/parseSortParamsProducts.js';
+import { parsedNameProduct } from '../utils/parseFilterParamsProducts.js';
 
 export const getProductsController = async (req, res, next) => {
-  const { sortBy, sortOrder } = parseSortParams(req.query);
-
   try {
+    const { sortBy, sortOrder } = parseSortParams(req.query);
+    const filter = parsedNameProduct(req.query);
+
     const products = await getAllProducts({
       sortBy,
       sortOrder,
+      filter,
     });
-    res.json({
+
+    res.status(200).json({
       status: 200,
       message: 'Successfully found products!',
-      data: products,
+      data: products.data,
     });
   } catch (err) {
     next(err);

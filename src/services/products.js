@@ -1,8 +1,16 @@
+import { SORT_ORDER } from '../constants/index.js';
 import { Product } from '../db/models/products.js';
 
-export const getAllProducts = async () => {
-  const products = await Product.find();
-  return products;
+export const getAllProducts = async ({
+  sortOrder = SORT_ORDER.ASC,
+  sortBy = '_id',
+}) => {
+  const productQuery = Product.find();
+  const products = await productQuery.sort({ [sortBy]: sortOrder }).exec();
+
+  return {
+    data: products,
+  };
 };
 
 export const createProduct = async (payload) => {

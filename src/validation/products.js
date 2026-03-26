@@ -10,12 +10,14 @@ export const createProductSchema = Joi.object({
   category: Joi.string()
     .valid(
       'Medicine',
-      'Heart',
       'Head',
       'Hand',
-      'Leg',
       'Dental Care',
       'Skin Care',
+      'Eye Care',
+      'Vitamins & Supplements',
+      'Orthopedic Products',
+      'Baby Care',
     )
     .required(),
 });
@@ -29,11 +31,13 @@ export const updateProductSchema = Joi.object({
   price: Joi.string().trim(),
   category: Joi.string().valid(
     'Medicine',
-    'Heart',
     'Head',
     'Hand',
-    'Leg',
     'Dental Care',
     'Skin Care',
+    'Eye Care',
+    'Vitamins & Supplements',
+    'Orthopedic Products',
+    'Baby Care',
   ),
 }).min(1);

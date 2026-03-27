@@ -23,7 +23,7 @@ export const getProductsController = async (req, res, next) => {
     res.status(200).json({
       status: 200,
       message: 'Successfully found products!',
-      data: products.data,
+      data: products,
     });
   } catch (err) {
     next(err);

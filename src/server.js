@@ -8,6 +8,7 @@ import suppliersRouter from './routers/suppliers.js';
 import customersRouter from './routers/customers.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import dashboardRouter from './routers/dashboard.js';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -29,6 +30,7 @@ export const startServer = () => {
   app.use(productsRouter);
   app.use(suppliersRouter);
   app.use(customersRouter);
+  app.use(dashboardRouter);
 
   app.use(notFoundHandler);
   app.use(errorHandler);

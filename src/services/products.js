@@ -16,9 +16,7 @@ export const getAllProducts = async ({
     .sort({ [sortBy]: sortOrder })
     .exec();
 
-  return {
-    data: products,
-  };
+  return products;
 };
 
 export const createProduct = async (payload) => {

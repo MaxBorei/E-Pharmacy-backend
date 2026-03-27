@@ -16,7 +16,5 @@ export const getAllOrders = async ({
     .sort({ [sortBy]: sortOrder })
     .exec();
 
-  return {
-    data: orders,
-  };
+  return orders;
 };

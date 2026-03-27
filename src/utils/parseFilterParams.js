@@ -1,4 +1,4 @@
-export const parsedNameProduct = (query) => {
+export const parsedName = (query) => {
   if (!query.name) return {};
   const isString = typeof query.name === 'string';
   if (!isString) return {};

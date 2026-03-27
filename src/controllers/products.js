@@ -5,13 +5,14 @@ import {
   getAllProducts,
   updateProduct,
 } from '../services/products.js';
-import { parseSortParams } from '../utils/parseSortParamsProducts.js';
-import { parsedNameProduct } from '../utils/parseFilterParamsProducts.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
+import { parsedName } from '../utils/parseFilterParams.js';
+import { productFields } from '../constants/index.js';
 
 export const getProductsController = async (req, res, next) => {
   try {
-    const { sortBy, sortOrder } = parseSortParams(req.query);
-    const filter = parsedNameProduct(req.query);
+    const { sortBy, sortOrder } = parseSortParams(req.query, productFields);
+    const filter = parsedName(req.query);
 
     const products = await getAllProducts({
       sortBy,

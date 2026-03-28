@@ -7,8 +7,11 @@ import {
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { supplierSchemaValidation } from '../validation/suppliers.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const suppliersRouter = Router();
+
+suppliersRouter.use(authenticate);
 
 suppliersRouter.get('/suppliers', suppliersController);
 

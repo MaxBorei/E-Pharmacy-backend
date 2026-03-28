@@ -9,6 +9,8 @@ import customersRouter from './routers/customers.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import dashboardRouter from './routers/dashboard.js';
+import authRouter from './routers/auth.js';
+import cookieParser from 'cookie-parser';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -17,6 +19,7 @@ export const startServer = () => {
 
   app.use(express.json());
   app.use(cors());
+  app.use(cookieParser());
 
   app.use(
     pino({
@@ -26,6 +29,7 @@ export const startServer = () => {
     }),
   );
 
+  app.use(authRouter);
   app.use(ordersRouter);
   app.use(productsRouter);
   app.use(suppliersRouter);

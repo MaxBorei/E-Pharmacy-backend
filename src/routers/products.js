@@ -11,8 +11,11 @@ import {
   updateProductSchema,
 } from '../validation/products.js';
 import { validateBody } from '../middlewares/validateBody.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const productsRouter = Router();
+
+productsRouter.use(authenticate);
 
 productsRouter.get('/products', getProductsController);
 

@@ -1,5 +1,6 @@
 import { ONE_DAY } from '../constants/index.js';
 import {
+  getUserInfo,
   loginUser,
   logoutUser,
   refreshUsersSession,
@@ -72,5 +73,14 @@ export const refreshUserSessionController = async (req, res) => {
     data: {
       accessToken: session.accessToken,
     },
+  });
+};
+
+export const userInfoController = async (req, res) => {
+  const data = await getUserInfo(req.user);
+  res.json({
+    status: 200,
+    message: 'Successfully found user info!',
+    data,
   });
 };

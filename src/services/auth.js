@@ -20,11 +20,6 @@ export const loginUser = async ({ email, password }) => {
     throw createHttpError(401, 'User not found');
   }
   const isEqual = await bcrypt.compare(password, user.password);
-  console.log({
-    inputPassword: password,
-    dbPassword: user.password,
-    isEqual,
-  });
   if (!isEqual) {
     throw createHttpError(401, 'Unauthorized');
   }
@@ -84,4 +79,12 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     userId: session.userId,
     ...newSession,
   });
+};
+
+export const getUserInfo = async (user) => {
+  if (!user) {
+    throw createHttpError(401, 'Unauthorized');
+  }
+  const resultInfo = { name: user.name, email: user.email };
+  return resultInfo;
 };

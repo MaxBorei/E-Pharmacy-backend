@@ -1,17 +1,25 @@
 import { getCustomerById, getCustomers } from '../services/customers.js';
 import createHttpError from 'http-errors';
+import { parsedName } from '../utils/parseFilterParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
+import { customersFields } from '../constants/index.js';
 
 export const getCustomersController = async (req, res, next) => {
   try {
-    const customers = await getCustomers();
+    const { sortBy, sortOrder } = parseSortParams(req.query, customersFields);
+    const filter = parsedName(req.query);
+
+    const customers = await getCustomers({
+      sortBy,
+      sortOrder,
+      filter,
+    });
+
     res.json({
       status: 200,
       message: 'Successfully found customers!',
       data: customers,
     });
-
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(res, null, 2));
   } catch (err) {
     next(err);
   }

@@ -31,7 +31,7 @@ productsRouter.delete(
   deleteProductController,
 );
 
-productsRouter.put(
+productsRouter.patch(
   '/products/:productId',
   isValidId('productId'),
   validateBody(updateProductSchema),

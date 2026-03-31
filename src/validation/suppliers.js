@@ -8,3 +8,12 @@ export const supplierSchemaValidation = Joi.object({
   amount: Joi.string().min(3).max(30).required(),
   status: Joi.string().valid('Active', 'Deactive').required(),
 });
+
+export const updateSupplierSchemaValidation = Joi.object({
+  name: Joi.string().min(3).max(30),
+  address: Joi.string().min(3).max(50),
+  suppliers: Joi.string().min(3).max(30),
+  date: Joi.string(),
+  amount: Joi.string().min(3).max(30),
+  status: Joi.string().valid('Active', 'Deactive').min(1),
+});

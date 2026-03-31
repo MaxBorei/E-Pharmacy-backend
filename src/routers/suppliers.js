@@ -6,7 +6,10 @@ import {
 } from '../controllers/suppliers.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
-import { supplierSchemaValidation } from '../validation/suppliers.js';
+import {
+  supplierSchemaValidation,
+  updateSupplierSchemaValidation,
+} from '../validation/suppliers.js';
 import { authenticate } from '../middlewares/authenticate.js';
 
 const suppliersRouter = Router();
@@ -21,10 +24,10 @@ suppliersRouter.post(
   createSuppliersController,
 );
 
-suppliersRouter.put(
+suppliersRouter.patch(
   '/suppliers/:supplierId',
   isValidId('supplierId'),
-  validateBody(supplierSchemaValidation),
+  validateBody(updateSupplierSchemaValidation),
   updateSuppliersController,
 );
 

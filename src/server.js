@@ -22,7 +22,7 @@ export const startServer = () => {
     cors({
       origin: [
         'http://localhost:5173',
-        'https://https://pharmacy-admin-dashboard-eta.vercel.app',
+        'https://pharmacy-admin-dashboard-eta.vercel.app',
       ],
       credentials: true,
     }),

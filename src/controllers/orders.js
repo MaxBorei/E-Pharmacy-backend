@@ -1,17 +1,21 @@
 import { orderFields } from '../constants/index.js';
 import { getAllOrders } from '../services/orders.js';
 import { parsedName } from '../utils/parseFilterParams.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const getOrdersContoller = async (req, res, next) => {
   try {
     const { sortBy, sortOrder } = parseSortParams(req.query, orderFields);
     const filter = parsedName(req.query);
+    const { page, perPage } = parsePaginationParams(req.query);
 
     const orders = await getAllOrders({
       sortBy,
       sortOrder,
       filter,
+      page,
+      perPage,
     });
 
     res.status(200).json({

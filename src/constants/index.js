@@ -33,5 +33,14 @@ export const customersFields = [
   'register_date',
 ];
 
+export const supplierFields = [
+  'name',
+  'address',
+  'suppliers',
+  'date',
+  'amount',
+  'status',
+];
+
 export const FIFTEEN_MINUTES = 15 * 60 * 1000;
 export const ONE_DAY = 24 * 60 * 60 * 1000;

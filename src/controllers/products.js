@@ -8,16 +8,20 @@ import {
 import { parseSortParams } from '../utils/parseSortParams.js';
 import { parsedName } from '../utils/parseFilterParams.js';
 import { productFields } from '../constants/index.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 
 export const getProductsController = async (req, res, next) => {
   try {
     const { sortBy, sortOrder } = parseSortParams(req.query, productFields);
     const filter = parsedName(req.query);
+    const { page, perPage } = parsePaginationParams(req.query);
 
     const products = await getAllProducts({
       sortBy,
       sortOrder,
       filter,
+      perPage,
+      page,
     });
 
     res.status(200).json({

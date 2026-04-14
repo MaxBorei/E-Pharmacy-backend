@@ -1,22 +1,34 @@
 import { SORT_ORDER } from '../constants/index.js';
 import { Product } from '../db/models/products.js';
+import { calculatePaginationData } from '../utils/parsePaginationParams.js';
 
 export const getAllProducts = async ({
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
   filter = {},
+  perPage,
+  page,
 }) => {
   const mongoFilter = {};
+  const limit = perPage;
+  const skip = (page - 1) * perPage;
 
   if (filter.name) {
     mongoFilter.name = new RegExp(filter.name, 'i');
   }
+  const productQuery = Product.find(mongoFilter);
+  const productCount = await Product.countDocuments(mongoFilter);
 
-  const products = await Product.find(mongoFilter)
+  const products = await productQuery
+    .skip(skip)
+    .limit(limit)
     .sort({ [sortBy]: sortOrder })
     .exec();
-
-  return products;
+  const paginationData = calculatePaginationData(productCount, perPage, page);
+  return {
+    data: products,
+    ...paginationData,
+  };
 };
 
 export const createProduct = async (payload) => {

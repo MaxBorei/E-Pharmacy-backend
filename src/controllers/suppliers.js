@@ -4,18 +4,30 @@ import {
   getAllSuppliers,
   updateSupplier,
 } from '../services/suppliers.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
+import { parsedName } from '../utils/parseFilterParams.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { supplierFields } from '../constants/index.js';
 
 export const suppliersController = async (req, res, next) => {
   try {
-    const suppliers = await getAllSuppliers();
+    const { sortBy, sortOrder } = parseSortParams(req.query, supplierFields);
+    const fiter = parsedName(req.query);
+    const { page, perPage } = parsePaginationParams(req.query);
+
+    const suppliers = await getAllSuppliers({
+      sortBy,
+      sortOrder,
+      fiter,
+      page,
+      perPage,
+    });
+
     res.json({
       status: 200,
       message: 'Successfully found suppliers!',
       data: suppliers,
     });
-
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(res, null, 2));
   } catch (err) {
     next(err);
   }

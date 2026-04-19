@@ -24,7 +24,7 @@ export const loginUser = async ({ email, password }) => {
     throw createHttpError(401, 'Unauthorized');
   }
 
-  await Session.deleteOne({ userId: user._id });
+  await Session.deleteMany({ userId: user._id });
 
   const accessToken = randomBytes(30).toString('base64');
   const refreshToken = randomBytes(30).toString('base64');
@@ -73,7 +73,7 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
 
   const newSession = createSession();
 
-  await Session.deleteOne(session);
+  await Session.deleteOne({ _id: session._id });
 
   return await Session.create({
     userId: session.userId,

@@ -40,5 +40,6 @@ export const updateProductSchema = Joi.object({
     'Vitamins & Supplements',
     'Orthopedic Products',
     'Baby Care',
+    'Leg',
   ),
 }).min(1);

@@ -39,6 +39,7 @@ const productSchema = new Schema(
         'Vitamins & Supplements',
         'Orthopedic Products',
         'Baby Care',
+        'Leg',
       ],
     },
   },

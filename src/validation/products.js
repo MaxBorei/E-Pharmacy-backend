@@ -18,6 +18,7 @@ export const createProductSchema = Joi.object({
       'Vitamins & Supplements',
       'Orthopedic Products',
       'Baby Care',
+      'Leg',
     )
     .required(),
 });
